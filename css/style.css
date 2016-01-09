@@ -1,0 +1,84 @@
+/*
+@font-size-base:          14px;
+@font-size-small:         ceil((@font-size-base * 0.85)); // ~12px
+*/
+
+.smaller {
+/*  font-size: @font-size-small; */
+  font-size: 12px;
+}
+
+a.smaller {
+  font-size: 11px;
+  color: #666;
+  font-weight:normal;
+  text-decoration: underline !important;
+}
+
+a.hide {
+  display: none;
+}
+
+th, td {
+  text-align: center;
+}
+
+.tag {
+  background-color: #729F78;
+  color: #fff;
+
+  padding: 1px 4px 2px;
+  margin: 0 5px 5px;
+
+  display: inline-block;
+
+  font-size: 10.998px;
+  font-weight: bold;
+  line-height: 14px;
+  white-space: nowrap;
+  vertical-align: baseline;
+
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+
+span.tag.not-read {
+  background-color: #5cb85c !important;
+}
+
+label.timeline, span.timeline {
+  font-size: 12px;
+}
+label.timeline {
+  float: left;
+  display: inline-block;
+  width: 80px;
+  color: #666;
+}
+
+label.timeline.not-read {
+  color: #000 !important;
+}
+
+.not-read {
+  font-weight: bold;
+}
+
+.details {
+  font-weight: normal;
+  height: 500px;
+  max-width: 650px;
+  overflow: scroll;
+}
+.competitors label {
+  font-weight: bold;
+}
+.competitors span {
+  padding-right: 10px;
+}
+
+.details h1, .details h2, .details h3, .details h4 {
+  font-size: 12px;
+}

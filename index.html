@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title ng-bind="header">New [topcoder] challenges</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-sanitize.min.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body role="document">
+
+    <div class="container" role="main" ng-controller="ChallengesCtrl">
+      <h1>New [topcoder] challenges</h1>
+
+      <p>
+        <span ng-bind-html="numNewChallenges"></span>
+        <span>Total number of challenges: <strong>{{challenges.length}}</strong>.</span>
+        <span ng-bind-html="lastUpdate"></span>
+      </p>
+
+      <p class="text-right">
+        <button type="button" class="btn btn-sm btn-default" ng-click="markAllRead()">Mark all as Read</button>
+        <button type="button" class="btn btn-sm btn-default" ng-click="updateChallenges()">Update</button>
+      </p>
+      <table class="table table-bordered table-hover">
+       <thead>
+        <tr>
+         <th class="xcol-md-1" style="width:60px">#</th>
+         <th class="col-md-1">Type</th>
+         <th class="text-left">Challenge</th>
+         <th class="xcol-md-1" style="width:80px">1st Prize</th>
+         <th class="" style="width:200px">Timeline</th>
+        </tr>
+       </thead>
+       <tbody>
+         <tr class="active {{c.isnew}}" ng-repeat="c in challenges | orderBy:'-registrationStartDate' "
+              ng-mouseover="hover = false" ng-mouseleave="hover = true" ng-init="hover = true">
+           <td class="smaller" ng-click="markRead(c)">
+             {{$index+1}}
+             <div>
+               <a href="" ng-if="c.isnew" class="smaller" ng-class="{hide: hover}">Mark as Read</a>
+             </div>
+           </td>
+           <td class="smaller">{{c.challengeType}}</td>
+           <td class="text-left" ng-mouseenter="count = count + 1" ng-mouseleave="">
+              <div style="min-height:50px">
+              <a href="http://www.topcoder.com/challenge-details/{{c.challengeId}}/?type=develop">
+                {{c.challengeName}}
+              </a>
+               <div style="margin-bottom:5px">
+                  <a ng-attr-id="{{'show-details-' + c.challengeId}}" href="" class="smaller" ng-click="showDetails(c.challengeId)">view details</a>
+               </div>
+               <div ng-attr-id="{{'details-' + c.challengeId}}" class="smaller hide">
+                 <div class="competitors">
+                   <label class="">Registrants:</label> <span class="">{{c.numRegistrants}}</span>
+                   <label class="">Submissions:</label> <span class="">{{c.numSubmissions}}</span>
+                 </div>
+                 <div ng-attr-id="{{'req-' + c.challengeId}}" class="details">Retrieving...</div>
+               </div>
+              </div>
+              <div>
+                <!-- <span class="smaller tag {{c.isnew}}" ng-repeat="p in c.platforms">{{ p }}</span> -->
+                <span class="smaller tag {{c.isnew}}" ng-repeat="t in c.technologies track by $index">{{ t }}</span>
+              </div>
+           </td>
+           <td>
+             {{c.firstPlacePrize | currency:"$"}}<br />
+             <small>{{c.totalPrize - c.firstPlacePrize | currency:"$"}}</small>
+           </td>
+           <td class="smaller text-left">
+             <p>
+              <label class="timeline {{c.isnew}}">Start date:</label>
+              <span class="timeline">
+                {{c.registrationStartDate | date:'EEE dd MMM HH:mm'}}
+              </span>
+             </p>
+             <p>
+              <label class="timeline {{c.isnew}}">Register by:</label>
+              <span class="timeline">
+                {{c.registrationEndDate | date:'EEE dd MMM HH:mm'}}
+              </span>
+             </p>
+             <p>
+              <label class="timeline {{c.isnew}}">Submit by:</label>
+              <span class="timeline">
+                {{c.submissionEndDate | date:'EEE dd MMM HH:mm'}}
+              </span>
+             </p>
+           </td>
+         </tr>
+       </tbody>
+      </table>
+
+    </div><!-- /.container -->
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
